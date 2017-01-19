@@ -1,0 +1,62 @@
+﻿@model IEnumerable<AnthonyWard.PersonalWebsite.UI.Models.Post>
+
+@{
+    ViewBag.Title = "Posts";
+}
+
+<h4 style="float: right;">@Html.DisplayFor(modelItem => Model.FirstOrDefault().Thread.Name)</h4>
+<h2>Posts</h2>
+
+<table>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Body
+        </th>
+        <th>
+            Created
+        </th>
+        <th>
+            User
+        </th>
+        @*only show if user is logged in*@
+        @if (Context.User.Identity.IsAuthenticated)
+        {
+        <th></th>
+        }
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Body)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Created)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.Name)
+        </td>
+        @*only show if user is logged in*@
+        @if (Context.User.Identity.IsAuthenticated)
+        {
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+        </td>
+        }
+    </tr>
+}
+
+</table>
+
+<hr />
+<p>
+    @Html.ActionLink("Create New", "Create", new { threadId = Request.QueryString["threadId"] })
+</p>

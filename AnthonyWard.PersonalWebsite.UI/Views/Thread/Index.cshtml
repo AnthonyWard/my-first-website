@@ -1,0 +1,57 @@
+﻿@model IEnumerable<AnthonyWard.PersonalWebsite.UI.Models.Thread>
+
+@{
+    ViewBag.Title = "Threads";
+}
+
+<h4 style="float: right;">@Html.DisplayFor(modelItem => Model.FirstOrDefault().Forum.Name)</h4>
+<h2>Threads</h2>
+
+<table>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Created
+        </th>
+        <th>
+            User
+        </th>
+        @*only show if user is logged in*@
+        @if (Context.User.Identity.IsAuthenticated)
+        {
+        <th></th>
+        }
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.ActionLink(item.Name, "Index", "Post", new { threadId = item.ID }, null)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Created)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User.Name)
+        </td>
+        @*only show if user is logged in*@
+        @if (Context.User.Identity.IsAuthenticated)
+        {
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+        </td>
+        }
+    </tr>
+}
+
+</table>
+
+<hr />
+<p>
+    @Html.ActionLink("Create New", "Create", new { forumId = Request.QueryString["forumId"] })
+</p>

@@ -1,0 +1,73 @@
+﻿@model AnthonyWard.PersonalWebsite.UI.ViewModel.RambleCreate
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm(true)) {
+    @Html.ValidationSummary(false)
+    <fieldset>
+        <legend>Ramble</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Ramble.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Ramble.Name)
+            @Html.ValidationMessageFor(model => model.Ramble.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Ramble.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Ramble.Description)
+            @Html.ValidationMessageFor(model => model.Ramble.Description)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Ramble.Body)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Ramble.Body)
+            @Html.ValidationMessageFor(model => model.Ramble.Body)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Ramble.ImageUrl)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Ramble.ImageUrl)
+            @Html.ValidationMessageFor(model => model.Ramble.ImageUrl)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Ramble.Created)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Ramble.Created)
+            @Html.ValidationMessageFor(model => model.Ramble.Created)
+        </div>
+        
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Ramble.UserId)
+        </div>
+        <div class="editor-field">
+            @Html.DropDownListFor(x => x.Ramble.UserId, Model.Users)
+            @Html.ValidationMessageFor(model => model.Ramble.UserId)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

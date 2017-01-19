@@ -1,0 +1,55 @@
+﻿@model IEnumerable<AnthonyWard.PersonalWebsite.UI.Models.Forum>
+
+@{
+    ViewBag.Title = "Forums";
+}
+
+<h2>Forums</h2>
+
+<table>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Created
+        </th>
+        @*only show if user is logged in*@
+        @if (Context.User.Identity.IsAuthenticated)
+        {
+        <th></th>
+        }
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.Name, "Index", "Thread", new { forumId = item.ID }, null)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Created)
+        </td>
+        @*only show if user is logged in*@
+        @if (Context.User.Identity.IsAuthenticated)
+        {
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+        </td>
+        }
+    </tr>
+}
+
+</table>
+
+<hr />
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>

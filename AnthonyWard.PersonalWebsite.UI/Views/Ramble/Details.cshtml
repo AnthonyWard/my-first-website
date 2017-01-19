@@ -1,0 +1,50 @@
+﻿@model AnthonyWard.PersonalWebsite.UI.Models.Ramble
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<article>
+    <h2>@Html.DisplayFor(modelItem => Model.Name)</h2>
+    <p>@Html.DisplayFor(modelItem => Model.Description)</p>
+    <p>@Html.DisplayFor(modelItem => Model.Body)</p>
+    
+    <p class="soft">
+        Made on @Html.DisplayFor(modelItem => Model.Created) by @Html.DisplayFor(modelItem => Model.User.Name)
+    </p>
+    
+    <p class="tags">
+    <strong>Tags: </strong>
+        @foreach (var tag in Model.Tags)
+        {
+            @tag.Name@:&nbsp;
+        }
+    </p>
+
+    <p class="soft">
+    @Html.ActionLink("Details", "Details", new { id = Model.ID })&nbsp;
+    @Html.ActionLink("Add Comment", "Create", "Comment", new { id = Model.ID }, null)
+    @if (Context.User.Identity.IsAuthenticated)
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) @:&nbsp
+        @Html.ActionLink("Delete", "Delete", new { id = Model.ID }) @:&nbsp
+        @Html.ActionLink("Create New", "Create")
+    }
+    </p>
+</article>
+<p>@Html.ActionLink("Back to Rambles", "Index", "Ramble")</p>
+
+
+@section footer
+{
+<footer>
+    <h2>Comments</h2>
+    @foreach (AnthonyWard.PersonalWebsite.UI.Models.Comment comment in Model.Comments)
+    {
+        <aside>
+        <p>@comment.Body</p>
+        <h6>Left on @comment.Created for ramble @comment.Ramble.Name</h6>
+        </aside>
+    }
+</footer>
+}

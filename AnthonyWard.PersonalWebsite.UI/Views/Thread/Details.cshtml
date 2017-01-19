@@ -1,0 +1,40 @@
+﻿@model AnthonyWard.PersonalWebsite.UI.Models.Thread
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Thread</legend>
+
+    <div class="display-label">Name</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">Created</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Created)
+    </div>
+
+    <div class="display-label">Hide</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Hide)
+    </div>
+
+    <div class="display-label">Forum</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Forum.Name)
+    </div>
+
+    <div class="display-label">User</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.User.Name)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

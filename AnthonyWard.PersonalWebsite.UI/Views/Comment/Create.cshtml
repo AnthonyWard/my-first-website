@@ -1,0 +1,34 @@
+﻿@model AnthonyWard.PersonalWebsite.UI.Models.Comment
+
+@{
+    ViewBag.Title = "Add Comment";
+}
+
+<h2>Got something to say?</h2>
+<p>about ramble: @Model.Ramble.Name?</p>
+
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(false)
+    <fieldset>
+        <legend>Comment</legend>
+            @Html.HiddenFor(model => model.RambleId)
+
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Body)
+            @Html.ValidationMessageFor(model => model.Body)
+        </div>
+
+        @Html.HiddenFor(model => model.Created)
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to Rambles", "Index", "Ramble")
+</div>
